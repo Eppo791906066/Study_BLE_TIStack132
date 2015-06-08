@@ -50,6 +50,10 @@
   #include "DebugTrace.h"
 #endif
 
+#ifdef LCD_TO_UART
+  #include "npi.h"
+#endif
+
 /**************************************************************************************************
  *                                          CONSTANTS
  **************************************************************************************************/
@@ -268,6 +272,11 @@ void HalLcdInit(void)
  **************************************************************************************************/
 void HalLcdWriteString ( char *str, uint8 option)
 {
+#ifdef LCD_TO_UART
+ NPI_WriteTransport ( (uint8*)str,osal_strlen(str));
+ NPI_WriteTransport ("\r\n",2);
+#endif  
+  
 #if (HAL_LCD == TRUE)
 
   uint8 strLen = 0;

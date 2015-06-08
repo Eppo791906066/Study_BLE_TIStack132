@@ -237,7 +237,7 @@ static void simpleBLEPeripheral_HandleKeys( uint8 shift, uint8 keys );
 static char *bdAddr2Str ( uint8 *pAddr );
 #endif // (defined HAL_LCD) && (HAL_LCD == TRUE)
 
-
+static void NpiSerialCallback(uint8 port, uint8 events);
 
 /*********************************************************************
  * PROFILE CALLBACKS
@@ -286,11 +286,15 @@ void SimpleBLEPeripheral_Init( uint8 task_id )
   simpleBLEPeripheral_TaskID = task_id;
   
   
-  /* 2015-06-08 study_uart_send */
-  //Npi Uart Init
-  NPI_InitTransport(NULL);
-  NPI_WriteTransport("Hello WeBee\r\n",13);
+//  /* 2015-06-08 study_uart_send */
+//  //Npi Uart Init
+//  NPI_InitTransport(NULL);
+//  NPI_WriteTransport("Hello WeBee\r\n",13);
 
+  /* 2015-06-08 suy_2_uart_receieve */
+  //Npi Uart Init
+  NPI_InitTransport(NpiSerialCallback);
+  NPI_WriteTransport("Hello World\r\n",13);
   
   // Setup the GAP
   VOID GAP_SetParamValue( TGAP_CONN_PAUSE_PERIPHERAL, DEFAULT_CONN_PAUSE_PERIPHERAL );
@@ -816,6 +820,27 @@ char *bdAddr2Str( uint8 *pAddr )
   return str;
 }
 #endif // (defined HAL_LCD) && (HAL_LCD == TRUE)
+
+
+/* 2015-06-08 suy_2_uart_receieve */
+static void NpiSerialCallback( uint8 port, uint8 events )
+{//具体代码如下:
+  (void)port;
+  uint8 numBytes = 0; uint8 buf[128];
+  if (events & HAL_UART_RX_TIMEOUT) 
+  {
+    numBytes = NPI_RxBufLen(); 
+    if(numBytes)
+    {
+      //串口有数据 
+      //读出串口缓冲区有多少字节
+      //从串口缓冲区读出 numBytes 字节数据 
+      NPI_ReadTransport(buf,numBytes); 
+      //把串口接收到的数据再打印出来 
+      NPI_WriteTransport(buf,numBytes);
+    } 
+  } 
+}
 
 /*********************************************************************
 *********************************************************************/

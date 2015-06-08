@@ -86,9 +86,7 @@ extern "C"
 #define NPI_UART_INT_ENABLE            TRUE
 
 #if !defined( NPI_UART_BR )
-//#define NPI_UART_BR                    HAL_UART_BR_115200
-  /* 2015-06-08 Paul */
-  #define NPI_UART_BR                    HAL_UART_BR_57600
+#define NPI_UART_BR                    HAL_UART_BR_115200
 #endif // !NPI_UART_BR
 
 /*******************************************************************************

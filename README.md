@@ -2,6 +2,10 @@ ter-->dev<br>
 master-->study-->study_uart_send->suy_1_uart_send<br>
 分支suy_1_uart_send为《蓝牙4.0实战演练》3.3.1串口发送实验<p />
 
+##suy_2_uart_receive
+---
+将串口接收到的数据打印出去
+
 ##2015-06-08
 ---
 .DS_Store<br>
