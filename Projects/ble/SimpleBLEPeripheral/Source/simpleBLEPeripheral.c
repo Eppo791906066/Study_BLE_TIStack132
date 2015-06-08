@@ -79,6 +79,9 @@
   #include "oad_target.h"
 #endif
 
+/* 2015-06-08 study_uart_send */
+#include "npi.h"
+
 /*********************************************************************
  * MACROS
  */
@@ -281,6 +284,11 @@ static simpleProfileCBs_t simpleBLEPeripheral_SimpleProfileCBs =
 void SimpleBLEPeripheral_Init( uint8 task_id )
 {
   simpleBLEPeripheral_TaskID = task_id;
+  
+  /* 2015-06-08 study_uart_send */
+  //Npi Uart Init
+  NPI_InitTransport(NULL);
+  NPI_WriteTransport("Hello WeBee\r\n",13);
 
   // Setup the GAP
   VOID GAP_SetParamValue( TGAP_CONN_PAUSE_PERIPHERAL, DEFAULT_CONN_PAUSE_PERIPHERAL );

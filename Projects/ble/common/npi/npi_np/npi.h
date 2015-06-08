@@ -74,7 +74,9 @@ extern "C"
 #endif
 
 #if !defined( NPI_UART_FC )
-#define NPI_UART_FC                    TRUE
+//#define NPI_UART_FC                    TRUE
+  /* 2015-06-08 study_uart_send */
+  #define NPI_UART_FC                    FALSE
 #endif // !NPI_UART_FC
 
 #define NPI_UART_FC_THRESHOLD          48
@@ -84,7 +86,9 @@ extern "C"
 #define NPI_UART_INT_ENABLE            TRUE
 
 #if !defined( NPI_UART_BR )
-#define NPI_UART_BR                    HAL_UART_BR_115200
+//#define NPI_UART_BR                    HAL_UART_BR_115200
+  /* 2015-06-08 Paul */
+  #define NPI_UART_BR                    HAL_UART_BR_57600
 #endif // !NPI_UART_BR
 
 /*******************************************************************************
